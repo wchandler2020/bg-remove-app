@@ -22,6 +22,7 @@ public class UserServiceImplementation implements UserService{
            existingUser.setFirstName(userDTO.getFirstName());
            existingUser.setLastName(userDTO.getLastName());
            existingUser.setPhotoUrl(userDTO.getPhotoUrl());
+
            if(userDTO.getCredits() != null){
                existingUser.setCredits(userDTO.getCredits());
            }
@@ -36,6 +37,7 @@ public class UserServiceImplementation implements UserService{
     private UserDTO mapToDTO(UserEntity newUser) {
         return UserDTO.builder()
                 .clerkId(newUser.getClerkId())
+                .credits(newUser.getCredits())
                 .firstName(newUser.getFirstName())
                 .lastName(newUser.getLastName())
                 .email(newUser.getEmail())
