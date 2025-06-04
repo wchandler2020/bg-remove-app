@@ -4,6 +4,7 @@ import com.tiltedhat.bg_remove_API.dto.UserDTO;
 import com.tiltedhat.bg_remove_API.model.UserEntity;
 import com.tiltedhat.bg_remove_API.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -32,6 +33,20 @@ public class UserServiceImplementation implements UserService{
        UserEntity newUser = mapToEntity(userDTO);
        userRepository.save(newUser);
        return mapToDTO(newUser);
+    }
+
+    @Override
+    public UserDTO getUserByClerkId(String clerkId) {
+        UserEntity userEntity =  userRepository.findByClerkId(clerkId)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return mapToDTO(userEntity);
+    }
+
+    @Override
+    public void deleteUserByClerkId(String clerkId) {
+        UserEntity userEntity = userRepository.findByClerkId(clerkId)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        userRepository.delete(userEntity);
     }
 
     private UserDTO mapToDTO(UserEntity newUser) {
