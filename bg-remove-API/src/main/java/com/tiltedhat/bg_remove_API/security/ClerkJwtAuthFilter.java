@@ -69,6 +69,6 @@ public class ClerkJwtAuthFilter extends OncePerRequestFilter {
             response.sendError(HttpServletResponse.SC_FORBIDDEN, "Invalid JWT token!");
             return;
         }
-        filterChain.doFilter(request, response);
+//        filterChain.doFilter(request, response);
     }
 }
